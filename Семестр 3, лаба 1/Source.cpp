@@ -22,7 +22,7 @@ public:
 		}
 	}
 
-	Image(int l, int w, bool value = false) {
+	Image(int l, int w, const bool value) {
 		if (l < 0 || w < 0) throw(std::logic_error("incorrect image sizes"));
 		_l = l;
 		_w = w;
