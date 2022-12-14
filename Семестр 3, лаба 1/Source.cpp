@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stdexcept>
+#include<iomanip>
 
 #pragma once
 
@@ -22,8 +23,8 @@ public:
 		}
 	}
 
-	Image(int l, int w, const bool value) {
-		if (l < 0 || w < 0) throw(std::logic_error("incorrect image sizes"));
+	Image(int l, int w, bool value) {
+		if (l <= 0 || w <= 0) throw std::logic_error("incorrect image sizes");
 		_l = l;
 		_w = w;
 		_px = new bool* [_l];
@@ -149,25 +150,41 @@ public:
 		return out;
 	}
 
+	friend double fullness(const Image& obj) {
+		double empty = 0, full = 0;
+		for (int i = 0; i < obj._l; i++) {
+			for (int j = 0; j < obj._w; j++) {
+				empty++;
+				if (obj._px[i][j]) {
+					full++;
+					continue;
+				}
+			}
+		}
+		return full / empty;
+	}
 
 	Image creating_rectangle(int x1, int y1, int x2, int y2) {
+		if(x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) throw std::logic_error("coordinates mismatch");
 		int i = x1, j = y1;
-		while (i < x2) {
-			_px[i][j] = true;
-			++i;
+		if (_px[i][j] != true) {
+			while (i < x2) {
+				_px[i][j] = true;
+				++i;
+			}
+			while (j < y2) {
+				_px[i][j] = true;
+				++j;
+			}
+			while (i >= x1) {
+				_px[i][j] = true;
+				--i;
+			}
+			while (j >= y1) {
+				_px[i][j] = true;
+				--j;
+			}
+			return *this;
 		}
-		while (j < y2) {
-			_px[i][j] = true;
-			++j;
-		}
-		while (i >= x1) {
-			_px[i][j] = true;
-			--i;
-		}
-		while (j >= y1) {
-			_px[i][j] = true;
-			--j;
-		}
-		return *this;
 	}
 };
