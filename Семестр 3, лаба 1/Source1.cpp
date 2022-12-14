@@ -1,7 +1,5 @@
 #include<iostream>
 #include<conio.h>
-#include<locale.h>
-
 #include "Source.cpp"
 
 int main() {
@@ -11,40 +9,41 @@ int main() {
 	while (!exit) {
 		bool mean = 0;
 		int length = 0, width = 0;
+		/*std::cout << "Create the image\n\n" << "Enter the length and width of the images: ";
+		std::cin >> length;
+		std::cin >> width;
+		std::cout << "Enter the value for the image: ";
+		std::cin >> mean;
 		try {
+			Image picture(length, width, mean);
+			std::cout << picture << "\n\n";
+		}
+		catch (std::logic_error& err) {
+			std::cerr << err.what() << std::endl;
+		}
+		system("cls");*/
+		int sw;
+		std::cout << "\nChoose:\n1. Create the image\n2. Operations with images\n3. Operations with image and value\n4. Image inversion\n5. Calculate the occupancy rate\n6. Draw rectangle\n7. Reading/writing an element\n8. Exit\n";
+		std::cin >> sw;
+		system("cls");
+		switch (sw) {
+		case(1):
+		{
 			std::cout << "Create the image\n\n" << "Enter the length and width of the images: ";
 			std::cin >> length;
 			std::cin >> width;
 			std::cout << "Enter the value for the image: ";
 			std::cin >> mean;
-			Image picture(length, width, mean);
-			std::cout << picture << "\n\n";
-		}
-		catch (const char* err) {
-			std::cout << err << "\nДля продолжения нажмите любую кнопку.";
-			system("pause");
-		}
-		system("cls");
-		int sw;
-		std::cout << "Choose:\n1. Operations with images\n2. Operations with image and value\n3. Image inversion\n4. Calculate the occupancy rate\n5. Draw rectangle\n6. Reading/writing an element\n7. Exit\n";
-		std::cin >> sw;
-		system("cls");
-		switch (sw) {
-		/*case(1):
-		{
-			std::cout << "Enter the length and width of the images: ";
-			std::cin >> length >> width;
-			std::cout << "Enter the value for the image: ";
-			std::cin >> mean;
-			Image picture(length, width, mean);
-			double ratio = 0;
-			ratio = fullness(picture);
-			std::cout << "Occupancy rate  = " << ratio << "\n";
-			std::cout << picture << "\n";
-			system("cls");
+			try {
+				Image picture(length, width, mean);
+				std::cout << picture << "\n\n";
+			}
+			catch (std::logic_error& err) {
+				std::cerr << err.what() << std::endl;
+			}
 			break;
-		}*/
-		case(1):
+		}
+		case(2):
 		{
 			bool exit2 = false;
 			bool mean2, mean1;
@@ -89,7 +88,7 @@ int main() {
 			system("cls");
 			break;
 		}
-		case(2):
+		case(3):
 		{
 			bool value;
 			std::cout << "The meaning of the variable (0 or 1): ";
@@ -147,7 +146,7 @@ int main() {
 			}
 			break;
 		}
-		case(3):
+		case(4):
 		{
 			bool mean0;
 			std::cout << "Enter the length and width of the image: ";
@@ -160,7 +159,7 @@ int main() {
 			system("cls");
 			break;
 		}
-		case(4):
+		case(5):
 		{
 			bool mean0;
 			std::cout << "Enter the length and width of the image: ";
@@ -179,26 +178,29 @@ int main() {
 			system("cls");
 			break;
 		}
-		case(5):
+		case(6):
 		{
-			bool mean0;
+			bool mean0 = 0;
 			std::cout << "Enter the length and width of the image: ";
 			std::cin >> length >> width;
-			std::cout << "Enter the value for the image: ";
-			std::cin >> mean0;
 			system("cls");
 			Image picture0(length, width, mean0);
 			int x1, y1, x2, y2;
 			std::cout << "Enter the coordinates of the upper left and lower right vertices of the rectangle: \n";
 			std::cin >> x1 >> y1 >> x2 >> y2;
-			picture0.creating_rectangle(x1, y1, x2, y2);
-			std::cout << picture0;
+			try {
+				picture0.creating_rectangle(x1, y1, x2, y2);
+				std::cout << picture0;
+			}
+			catch (std::logic_error& err) {
+				std::cerr << err.what() << std::endl;
+			}
 			system("cls");
 			break;
 		}
-		case(6):
+		case(7):
 		{
-			bool value;
+			bool value, element;
 			int x = 0, y = 0;
 			std::cout << "Enter the length and width of the images: ";
 			std::cin >> length >> width;
@@ -208,17 +210,22 @@ int main() {
 			std::cout << picture << "\n\n";
 			std::cout << "Enter the coordinates of the cell: ";
 			std::cin >> x >> y;
-			bool element = picture(x, y);
-			std::cout << element << "\n\n";
-			std::cout << "Enter the value to the cell: ";
-			std::cin >> value;
-			picture(x, y) = value;
-			std::cout << picture(x, y) << "\n\n";
-			std::cout << picture << "\n\n";
+			try {
+				element = picture(x, y);
+				std::cout << element << "\n\n";
+				std::cout << "Enter the value to the cell: ";
+				std::cin >> value;
+				picture(x, y) = value;
+				std::cout << picture(x, y) << "\n\n";
+				std::cout << picture << "\n\n";
+			}
+			catch (std::logic_error& err) {
+				std::cerr << err.what() << std::endl;
+			}
 			system("cls");
 			break;
 		}
-		case(7):
+		case(8):
 		{
 			exit = true;
 			break;
