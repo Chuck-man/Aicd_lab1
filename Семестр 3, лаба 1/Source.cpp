@@ -144,13 +144,12 @@ public:
 	}
 
 	friend double fullness(const Image& obj) {
-		double empty = 0, full = 0;
+		double empty = 1, full = 0;
 		for (int i = 0; i < obj._l; i++) {
 			for (int j = 0; j < obj._w; j++) {
 				empty++;
 				if (obj._px[i][j]) {
 					full++;
-					continue;
 				}
 			}
 		}
