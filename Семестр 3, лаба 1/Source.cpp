@@ -53,7 +53,6 @@ public:
 		delete[] _px;
 	}
 
-	//Перегруженние операторов
 	bool& operator()(int l, int w) const {
 		if (l < 0 || l > _l || w < 0 || w > _w) throw std::out_of_range("invalid index");
 		return _px[l][w];
@@ -64,10 +63,10 @@ public:
 		Image temp_px(*this);
 		for (int i = 0; i < _l; i++) {
 			for (int j = 0; j < _w; j++) {
-				_px[i][j] = _px[i][j] || obj._px[i][j];
+				temp_px(i,j) = _px[i][j] || obj._px[i][j];
 			}
 		}
-		return *this;
+		return temp_px;
 	}
 
 	Image operator*(const Image& obj) const {
@@ -82,23 +81,20 @@ public:
 	}
 
 	Image operator+(const bool value) {
+		Image temp_px(*this);
 		for (int i = 0; i < _l; i++) {
 			for (int j = 0; j < _w; j++) {
-				_px[i][j] || value ?
-					_px[i][j] = true :
-					_px[i][j] = false;
+				temp_px(i, j) = _px[i][j] || value;
 			}
 		}
-		return *this;
+		return temp_px;
 	}
 
 	friend Image operator+(const bool value, const Image& obj) {
 		Image temp_px(obj);
 		for (int i = 0; i < obj._l; i++) {
 			for (int j = 0; j < obj._w; j++) {
-				temp_px(i, j) || value ?
-					temp_px(i, j) = true :
-					temp_px(i, j) = false;
+				temp_px(i, j) = obj._px[i][j] || value;
 			}
 		}
 		return temp_px;
@@ -108,23 +104,20 @@ public:
 		Image temp_px(obj);
 		for (int i = 0; i < obj._l; i++) {
 			for (int j = 0; j < obj._w; j++) {
-				temp_px(i, j) && value ?
-					temp_px(i, j) = true :
-					temp_px(i, j) = false;
+				temp_px(i, j) = obj._px[i][j] && value;
 			}
 		}
 		return temp_px;
 	}
 
 	Image operator*(const bool value) {
+		Image temp_px(*this);
 		for (int i = 0; i < _l; i++) {
 			for (int j = 0; j < _w; j++) {
-				_px[i][j] && value ?
-					_px[i][j] = true :
-					_px[i][j] = false;
+				temp_px(i, j) = _px[i][j] && value;
 			}
 		}
-		return *this;
+		return temp_px;
 	}
 
 	Image operator!() {
@@ -165,7 +158,7 @@ public:
 	}
 
 	Image creating_rectangle(int x1, int y1, int x2, int y2) {
-		if(x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) throw std::logic_error("coordinates mismatch");
+		if (x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) throw std::logic_error("coordinates mismatch");
 		int i = x1, j = y1;
 		if (_px[i][j] != true) {
 			while (i < x2) {

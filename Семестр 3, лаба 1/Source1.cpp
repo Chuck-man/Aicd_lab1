@@ -9,23 +9,9 @@ int main() {
 	while (!exit) {
 		bool mean = 0;
 		int length = 0, width = 0;
-		/*std::cout << "Create the image\n\n" << "Enter the length and width of the images: ";
-		std::cin >> length;
-		std::cin >> width;
-		std::cout << "Enter the value for the image: ";
-		std::cin >> mean;
-		try {
-			Image picture(length, width, mean);
-			std::cout << picture << "\n\n";
-		}
-		catch (std::logic_error& err) {
-			std::cerr << err.what() << std::endl;
-		}
-		system("cls");*/
 		int sw;
 		std::cout << "\nChoose:\n1. Create the image\n2. Operations with images\n3. Operations with image and value\n4. Image inversion\n5. Calculate the occupancy rate\n6. Draw rectangle\n7. Reading/writing an element\n8. Exit\n";
 		std::cin >> sw;
-		system("cls");
 		switch (sw) {
 		case(1):
 		{
@@ -55,27 +41,22 @@ int main() {
 			std::cin >> mean2;
 			Image picture1(length, width, mean1);
 			Image picture2(length, width, mean2);
-			system("cls");
-
 			while (!exit2) {
 				int sw2;
 				std::cout << "Choose:\n1. Adding pictures \n2. Multiplication of images \n3. Exit\n\n";
 				std::cin >> sw2;
-				Image picture3 = picture1;
-				Image picture4 = picture2;
+
 				switch (sw2) {
 				case(1):
 				{
 					std::cout << picture1 << "\n\n" << picture2 << "\n\n";
-					std::cout << picture3 + picture4;
-					system("cls");
+					std::cout << picture1 + picture2;
 					break;
 				}
 				case(2):
 				{
 					std::cout << picture1 << "\n\n" << picture2 << "\n\n";
-					std::cout << picture3 * picture4;
-					system("cls");
+					std::cout << picture1 * picture2;
 					break;
 				}
 				case(3):
@@ -85,7 +66,6 @@ int main() {
 				}
 				}
 			}
-			system("cls");
 			break;
 		}
 		case(3):
@@ -101,40 +81,34 @@ int main() {
 			std::cin >> length >> width;
 			std::cout << "Enter the value for the image: ";
 			std::cin >> mean3;
-			system("cls");
 			Image picture3(length, width, mean3);
 			while (!exit3) {
 				int sw3;
 				std::cout << "Choose:\n1. Adding a picture and a variable \n2. Multiplication a picture and a variable \n3. Adding a variable and a picture \n4. Multiplication a variable and a picture \n5. Exit\n\n";
 				std::cin >> sw3;
-				Image picture4 = picture3;
 				switch (sw3) {
 				case(1):
 				{
 					std::cout << "value = " << value <<"\n" << picture3 << "\n\n";
-					std::cout << picture4 + value;
-					system("cls");
+					std::cout << picture3 + value;
 					break;
 				}
 				case(2):
 				{
 					std::cout << "value = " << value << "\n" << picture3 << "\n\n";
-					std::cout << picture4 * value;
-					system("cls");
+					std::cout << picture3 * value;
 					break;
 				}
 				case(3):
 				{
 					std::cout << "value = " << value << "\n" << picture3 << "\n\n";
-					std::cout << value + picture4;
-					system("cls");
+					std::cout << value + picture3;
 					break;
 				}
 				case(4):
 				{
 					std::cout << "value = " << value << "\n" << picture3 << "\n\n";
-					std::cout << value * picture4;
-					system("cls");
+					std::cout << value * picture3;
 					break;
 				}
 				case(5):
@@ -153,20 +127,15 @@ int main() {
 			std::cin >> length >> width;
 			std::cout << "Enter the value for the image: ";
 			std::cin >> mean0;
-			system("cls");
 			Image picture0(length, width, mean0);
 			std::cout <<"Original\n" << picture0 << "\nInversion\n" << !picture0;
-			system("cls");
 			break;
 		}
 		case(5):
 		{
-			bool mean0;
+			bool mean0 = 0;
 			std::cout << "Enter the length and width of the image: ";
 			std::cin >> length >> width;
-			std::cout << "Enter the value for the image: ";
-			std::cin >> mean0;
-			system("cls");
 			Image picture0(length, width, mean0);
 			int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 			std::cout << "Enter the upper left and lower right coordinates of the rectangle: ";
@@ -175,7 +144,6 @@ int main() {
 			double ratio = 0;
 			ratio = fullness(picture0);
 			std::cout << "Occupancy rate  = " << ratio << "\n" << picture0;
-			system("cls");
 			break;
 		}
 		case(6):
@@ -183,7 +151,6 @@ int main() {
 			bool mean0 = 0;
 			std::cout << "Enter the length and width of the image: ";
 			std::cin >> length >> width;
-			system("cls");
 			Image picture0(length, width, mean0);
 			int x1, y1, x2, y2;
 			std::cout << "Enter the coordinates of the upper left and lower right vertices of the rectangle: \n";
@@ -195,7 +162,6 @@ int main() {
 			catch (std::logic_error& err) {
 				std::cerr << err.what() << std::endl;
 			}
-			system("cls");
 			break;
 		}
 		case(7):
@@ -222,7 +188,6 @@ int main() {
 			catch (std::logic_error& err) {
 				std::cerr << err.what() << std::endl;
 			}
-			system("cls");
 			break;
 		}
 		case(8):
